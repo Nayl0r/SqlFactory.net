@@ -20,5 +20,10 @@ namespace SqlFactory
         {
             return _sql;
         }
+
+        public Where Where(string column, Comparison comparison, string value)
+        {
+            return new Where(_sql, new Condition(ConditionType.INITIAL, column, comparison, value));
+        }
     }
 }
