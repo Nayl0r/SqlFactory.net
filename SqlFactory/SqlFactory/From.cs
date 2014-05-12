@@ -2,37 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SqlFactory
 {
-    /// <summary>
-    /// Creates the FROM section of a sql statement.
-    /// </summary>
     public class From
     {
-        public string Table { get; private set; }
-        public Where Where { get; private set; }
+        private readonly string _sql;
+        private string _table;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="From"/> class.
-        /// </summary>
-        /// <param name="schema">The schema.</param>
-        /// <param name="table">The table.</param>
-        public From(string schema, string table)
+        public From(string table, string initalSql)
         {
-            Table = string.Format("{0}.{1}", schema, table);
-        }
-
-        public Where Where(string condition)
-        {
-            Where = new Where(condition);
-            return Where;
+            _table = table;
+            _sql = string.Format("{0} FROM {1}", initalSql, _table);
         }
 
         public override string ToString()
         {
-            return Table;
+            return _sql;
         }
     }
 }
